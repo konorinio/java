@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+class robie_rzeczy {
+    public static void main(String[] args) {
+        // zad 1
+        String imie = "Karol Suchodolski";
+        System.out.println(imie);
+        
+        // zad 2
+       System.out.println(imie.length());
+       
+       // zad 3
+       String a ="Ala ";
+       String b = "ma ";
+       String c = "kota ";
+       String d = a + b + c;
+       System.out.println(d);
+    
+    // zad 4
+    // innym razem cos trudne sie wylosowalo
+    
+    // zad 5   
+    System.out.println(d.replace('a', 'e'));
+    
+    // zad bonusowe bo nie umiem czytac czyli 6
+    String str= "Ala ma kota", nstr="";
+        char ch;
+      for (int i=0; i<str.length(); i++)
+      {
+        ch= str.charAt(i);
+        nstr= ch+nstr;
+      }
+      System.out.println(nstr);
+      
+      // zad 6 te dobrze zrobione
+      System.out.println(d.toUpperCase());
+      System.out.println(d.toLowerCase());
+      
+      // zad 7
+      System.out.println((int));
+}
+}
