@@ -1,42 +1,116 @@
-import java.io.*;
-import java.util.*;
-class robie_rzeczy {
+class zestaw_1 {
     public static void main(String[] args) {
-        // zad 1
+        System.out.println("zad 1");
         String imie = "Karol Suchodolski";
         System.out.println(imie);
+        System.out.println();
+
+        System.out.println("zad 2");
+        System.out.println(imie.length());
+        System.out.println();
+
+        System.out.println("zad 3");
+        String a ="Ala ";
+        String b = "ma ";
+        String c = "kota ";
+        String d = a + b + c;
+        System.out.println(d);
+        System.out.println();
+
+        System.out.println("zad 4 strzalka");
+        int szerokosc = 6;
+        for (int i = 0; i < 3; i++) {
+            System.out.println("    *");
+        }
+
+        for (int i = 0; i < szerokosc; i++) {
+            System.out.print("* ");
+        }
+        System.out.println("*");
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println("    *");
+        }
+        System.out.println();
+
+        System.out.println("zad 4 diament");
+        int wysokosc = 5;
+        for (int i = 0; i < wysokosc; i++) {
+            for (int j = wysokosc - i; j > 1; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j <= i * 2; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
         
-        // zad 2
-       System.out.println(imie.length());
-       
-       // zad 3
-       String a ="Ala ";
-       String b = "ma ";
-       String c = "kota ";
-       String d = a + b + c;
-       System.out.println(d);
-    
-    // zad 4
-    // innym razem cos trudne sie wylosowalo
-    
-    // zad 5   
-    System.out.println(d.replace('a', 'e'));
-    
-    // zad bonusowe bo nie umiem czytac czyli 6
-    String str= "Ala ma kota", nstr="";
+        for (int i = wysokosc - 2; i >= 0; i--) {
+            for (int j = wysokosc - i; j > 1; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j <= i * 2; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+        System.out.println("zad 5");
+        System.out.println(d.replace('a', 'e'));
+        System.out.println();
+
+        System.out.println("zad bonusowe bo nie umiem czytac czyli 6");
+        String str= "Ala ma kota", nstr="";
         char ch;
-      for (int i=0; i<str.length(); i++)
-      {
-        ch= str.charAt(i);
-        nstr= ch+nstr;
-      }
-      System.out.println(nstr);
-      
-      // zad 6 te dobrze zrobione
-      System.out.println(d.toUpperCase());
-      System.out.println(d.toLowerCase());
-      
-      // zad 7
-      System.out.println((int));
-}
+        for (int i=0; i<str.length(); i++)
+        {
+            ch= str.charAt(i);
+            nstr= ch+nstr;
+        }
+        System.out.println(nstr);
+        System.out.println();
+
+        System.out.println("zad 6 te dobrze zrobione");
+        System.out.println(d.toUpperCase());
+        System.out.println(d.toLowerCase());
+        System.out.println();
+
+        System.out.println("zad 7");
+        char[] lista = {'A', '!', '@', '>', '~', '\n', '\b'};
+        for (char i : lista) {
+            System.out.println("Kod ASCII " + i + " : " + (int) i);
+        }
+        System.out.println();
+
+        System.out.println("zad 8");
+        System.out.println("Duze litery: 65-90 (A-Z)");
+        System.out.println("Male litery: 97-122 (a-z)");
+        System.out.println("Cyfry: 48-57 (0-9)");
+        System.out.println();
+
+        System.out.println("zad 9");
+        System.out.println("Grzesiek nie wiedział dlaczego Krzys jest tak drapieżnym studentem mimo, że jego promile na to nie wskazuje.");
+        System.out.println();
+
+        System.out.println("zad 10");
+        System.out.println("Ksiazka telefoniczna to najlepsza książka napisana przez pisarza.");
+        System.out.println();
+
+        System.out.println("zad 11");
+        for(int i=0; i<5; i++){
+            System.out.print("wodrze");
+        }
+        System.out.println();
+
+        System.out.println("zad 12");
+        System.out.println("Dzisiaj jest (10-10-2024) godzina (18:19:43)");
+        System.out.println();
+
+        System.out.println("zad 13");
+        int[] x = {54, 103, 241, 67, 9999, 10, 1234};
+        for (int y : x) {
+            System.out.println("Kod " + y + " to znak: " + (char) y);
+        }
+    }
 }
