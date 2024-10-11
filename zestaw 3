@@ -1,0 +1,55 @@
+public class zestaw3 {
+    public static void trojkiPitagorejskie(int n){
+        System.out.println("zad1");
+        for(int a=1; a<=n; a++){
+            for(int b=a; b<=n; b++){
+                for(int c=b; c<=n; c++){
+                    if(a*a+b*b==c*c){
+                        System.out.println("(" + a + "," + b + "," + c + ")");
+                    }
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    public static void liczbypodzielne(int m, int n){
+        System.out.println("zad5");
+        int[] x = {10, 2000, 103, 200, 5};
+        for(int i=0; i< x.length; i++){
+            if(x[i] >= 100 && x[i] < 1000  && x[i] % 5 == 0){
+                System.out.println(x[i]);
+            }
+        }
+        System.out.println();
+    }
+
+    public static void piramida(int n){
+        System.out.println("zad6");
+        int pomoc = n;
+        while(pomoc == 0){
+            for(int a=pomoc; a>=0; a--) {
+                System.out.print(" ");
+            }
+            System.out.println();
+            pomoc--;
+        }
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=i; j++){
+                System.out.print(" ");
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+    int n = 4;
+    int m = 3;
+    trojkiPitagorejskie(n);
+    liczbypodzielne(m, n);
+    piramida(n);
+    }
+}
