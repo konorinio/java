@@ -1,10 +1,14 @@
+import java.util.Scanner;
+
 public class zestaw3 {
-    public static void trojkiPitagorejskie(int n){
+
+
+    public static void trojkiPitagorejskie(int n) {
         System.out.println("zad1");
-        for(int a=1; a<=n; a++){
-            for(int b=a; b<=n; b++){
-                for(int c=b; c<=n; c++){
-                    if(a*a+b*b==c*c){
+        for (int a = 1; a <= n; a++) {
+            for (int b = a; b <= n; b++) {
+                for (int c = b; c <= n; c++) {
+                    if (a * a + b * b == c * c) {
                         System.out.println("(" + a + "," + b + "," + c + ")");
                     }
                 }
@@ -13,43 +17,334 @@ public class zestaw3 {
         System.out.println();
     }
 
-    public static void liczbypodzielne(int m, int n){
+
+    public static void funKwaRozwiazania(int n) {
+        System.out.println("zad2");
+        for (int a = 1; a <= n; a++) {
+            for (int b = 1; b <= n; b++) {
+                for (int c = 1; c <= n; c++) {
+                    int delta = b * b - 4 * a * c;
+                    if (delta >= 0) {
+                        System.out.println("(" + a + "," + b + "," + c + ")");
+                    }
+                }
+            }
+        }
+        System.out.println();
+    }
+
+
+    public static void funKwaDelta(int n) {
+        System.out.println("zad3");
+        for (int a = 1; a <= n; a++) {
+            for (int b = 1; b <= n; b++) {
+                for (int c = 1; c <= n; c++) {
+                    int delta = b * b - 4 * a * c;
+                    int sqrt = (int) Math.sqrt(delta);
+                    if (sqrt * sqrt == delta) {
+                        System.out.println("(" + a + "," + b + "," + c + ")");
+                    }
+                }
+            }
+        }
+        System.out.println();
+    }
+
+
+    public static void liczbyPierwsze(int n) {
+        System.out.println("zad4");
+        for (int i = 2; i <= n; i++) {
+            if (czyPierwsza(i)) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n");
+    }
+
+
+    public static void liczbypodzielne(int m, int n) {
         System.out.println("zad5");
         int[] x = {10, 2000, 103, 200, 5};
-        for(int i=0; i< x.length; i++){
-            if(x[i] >= 100 && x[i] < 1000  && x[i] % 5 == 0){
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] >= 100 && x[i] < 1000 && x[i] % 5 == 0) {
                 System.out.println(x[i]);
             }
         }
         System.out.println();
     }
 
-    public static void piramida(int n){
+
+    public static void piramida(int n) {
         System.out.println("zad6");
-        int pomoc = n;
-        while(pomoc == 0){
-            for(int a=pomoc; a>=0; a--) {
-                System.out.print(" ");
+        System.out.println("pierwsza: ");
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("* ");
             }
             System.out.println();
-            pomoc--;
         }
-        for(int i=1; i<=n; i++){
-            for(int j=1; j<=i; j++){
-                System.out.print(" ");
-                System.out.print("*");
+        for (int i = n - 1; i >= 1; i--) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("* ");
             }
             System.out.println();
         }
 
+        System.out.println("druga: ");
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
         System.out.println();
     }
 
+
+    public static long silnia(int n) {
+        System.out.println("zad7");
+        long wynik = 1;
+        for (int i = 2; i <= n; i++) {
+            wynik *= i;
+        }
+        System.out.println("Silnia " + n + " to " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static long silniaPodwojna(int n) {
+        System.out.println("zad8");
+        long wynik = 1;
+        for (int i = n; i > 0; i -= 2) {
+            wynik *= i;
+        }
+        System.out.println("Silnia podwójna " + n + " to " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static long silnia(int m, int n) {
+        System.out.println("zad9");
+        long wynik = 1;
+        for (int i = n; i > 0; i -= m) {
+            wynik *= i;
+        }
+        System.out.println("Silnia " + m + "-ta liczby " + n + " to " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static long dwumianNewtona(int n, int k) {
+        System.out.println("zad10");
+        long wynik = silnia(n) / (silnia(k) * silnia(n - k));
+        System.out.println("Dwumian Newtona dla (" + n + ", " + k + ") to " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static void ciagFibonacciego(int n) {
+        System.out.println("zad11");
+        int a = 0, b = 1;
+        System.out.print(a + " " + b + " ");
+        for (int i = 2; i < n; i++) {
+            int c = a + b;
+            System.out.print(c + " ");
+            a = b;
+            b = c;
+        }
+        System.out.println("\n");
+    }
+
+
+    public static void sumaNaturalnych(int n) {
+        System.out.println("zad12 - suma naturalnych");
+        int suma = (n * (n + 1)) / 2;
+        System.out.println("Suma liczb naturalnych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+    public static void sumaParzystych(int n) {
+        System.out.println("zad12 - suma parzystych");
+        int suma = 0;
+        for (int i = 2; i <= n; i += 2) {
+            suma += i;
+        }
+        System.out.println("Suma liczb parzystych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+    public static void sumaNieparzystych(int n) {
+        System.out.println("zad12 - suma nieparzystych");
+        int suma = 0;
+        for (int i = 1; i <= n; i += 2) {
+            suma += i;
+        }
+        System.out.println("Suma liczb nieparzystych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+    public static void sumaKwaNaturalnych(int n) {
+        System.out.println("zad12 - suma kwadratów naturalnych");
+        int suma = 0;
+        for (int i = 1; i <= n; i++) {
+            suma += i * i;
+        }
+        System.out.println("Suma kwadratów liczb naturalnych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+    public static void sumaSzeNaturalnych(int n) {
+        System.out.println("zad12 - suma sześcianów naturalnych");
+        int suma = 0;
+        for (int i = 1; i <= n; i++) {
+            suma += i * i * i;
+        }
+        System.out.println("Suma sześcianów liczb naturalnych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+    public static void sumaOdwNaturalnych(int n) {
+        System.out.println("zad12 - suma odwrotności naturalnych");
+        double suma = 0.0;
+        for (int i = 1; i <= n; i++) {
+            suma += 1.0 / i;
+        }
+        System.out.println("Suma odwrotności liczb naturalnych od 1 do " + n + " to " + suma);
+        System.out.println();
+    }
+
+
+    public static boolean czyPalindrom(String wyraz) {
+        System.out.println("zad13");
+        String reversed = new StringBuilder(wyraz).reverse().toString();
+        boolean wynik = wyraz.equals(reversed);
+        System.out.println("Czy " + wyraz + " jest palindromem: " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static void trojkatPascala(int n) {
+        System.out.println("zad14");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= i; j++) {
+                System.out.print(dwumianNewtona(i, j) + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
+    public static boolean czyPalindrom(int n) {
+        System.out.println("zad15");
+        String liczba = Integer.toString(n);
+        return czyPalindrom(liczba);
+    }
+
+
+    public static boolean czyDoskonala(int n) {
+        System.out.println("zad16");
+        int suma = 0;
+        for (int i = 1; i <= n / 2; i++) {
+            if (n % i == 0) {
+                suma += i;
+            }
+        }
+        boolean wynik = suma == n;
+        System.out.println("Czy liczba " + n + " jest doskonała: " + wynik);
+        System.out.println();
+        return wynik;
+    }
+
+
+    public static boolean czyPierwsza(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static int NWD(int a, int b) {
+        System.out.println("zad18");
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        System.out.println("NWD to: " + a);
+        System.out.println();
+        return a;
+    }
+
+
+    public static int[] wczytajTablice(int n, Scanner scanner) {
+        System.out.println("zad19");
+        int[] tablica = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Podaj element " + (i + 1) + ": ");
+            tablica[i] = scanner.nextInt();
+        }
+        return tablica;
+    }
+
+
+    public static void podzbiory(int[] tab) {
+        System.out.println("zad20");
+        int n = tab.length;
+        for (int i = 0; i < (1 << n); i++) {
+            System.out.print("{ ");
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0) {
+                    System.out.print(tab[j] + " ");
+                }
+            }
+            System.out.println("}");
+        }
+    }
+
+
     public static void main(String[] args) {
-    int n = 4;
-    int m = 3;
-    trojkiPitagorejskie(n);
-    liczbypodzielne(m, n);
-    piramida(n);
+        Scanner scanner = new Scanner(System.in);
+
+        trojkiPitagorejskie(10);
+        funKwaRozwiazania(10);
+        funKwaDelta(10);
+        liczbyPierwsze(10);
+        liczbypodzielne(5, 10);
+        piramida(5);
+        silnia(5);
+        silniaPodwojna(5);
+        silnia(2, 5);
+        dwumianNewtona(5, 2);
+        ciagFibonacciego(10);
+        sumaNaturalnych(10);
+        sumaParzystych(10);
+        sumaNieparzystych(10);
+        sumaKwaNaturalnych(10);
+        sumaSzeNaturalnych(10);
+        sumaOdwNaturalnych(10);
+        czyPalindrom("kajak");
+        trojkatPascala(5);
+        czyPalindrom(121);
+        czyDoskonala(6);
+        System.out.println("Czy liczba 7 jest pierwsza: " + czyPierwsza(7));
+        NWD(18, 24);
+
+        int[] tablica = wczytajTablice(5, scanner);
+        podzbiory(tablica);
+
+        scanner.close();
     }
 }
