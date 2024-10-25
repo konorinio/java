@@ -17,8 +17,8 @@ public class Main{
         System.out.println(Arrays.toString(tab3));
     }
 
-
-    public static int[] merge(int[] tab1, int[] tab2 ) {
+    // poprawic
+    public static void merge(int[] tab1, int[] tab2 ) {
         ArrayList<Integer> tab3 = new ArrayList<>();
         int r1 = tab1.length;
         int r2 = tab2.length;
@@ -31,13 +31,34 @@ public class Main{
                 tab3.add(tab2[i]);
             }
         }
-        return tab3;
+        //System.out.println(Arrays.toString(tab3));
+    }
+
+    //poprawic w chalupie
+    public static void mergeSorted(int[] tab1, int[] tab2) {
+        ArrayList<Integer> tab = new ArrayList<>();
+        for(int i=0; i<tab1.length; i++){
+            tab.add(tab1[i]);
+        }
+        for(int i=0; i<tab2.length; i++){
+            tab.add(tab2[i]);
+        }
+        int[] tab3 = new int[tab.size()];
+        for(int i=0; i<tab3.length; i++){
+            tab3[i] = tab.get(i);
+        }
+        for(int i=0; i<tab.toArray().length; i++){
+            naj = tab.toArray()[1];
+            System.out.print(tab.toArray()[i] + " ");
+        }
+        //System.out.println(Arrays.toString(tab3));
     }
 
 public static void main(String[] args) {
-    int[] tab1 = {1, 2, 3};
-    int[] tab2 = {4, 5, 6};
+    int[] tab1 = {5, 3, 6};
+    int[] tab2 = {2, 1, 2};
     //append(tab1, tab2);
-    merge(tab1, tab2);
+    //merge(tab1, tab2);
+    mergeSorted(tab1, tab2);
     }
 }
