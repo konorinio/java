@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Main{
+    public static void append(int[] tab1, int[] tab2) {
+        ArrayList<Integer> tab = new ArrayList<>();
+        for(int i=0; i<tab1.length; i++){
+            tab.add(tab1[i]);
+        }
+        for(int i=0; i<tab2.length; i++){
+            tab.add(tab2[i]);
+        }
+        int[] tab3 = new int[tab.size()];
+        for(int i=0; i<tab3.length; i++){
+            tab3[i] = tab.get(i);
+        }
+        System.out.println(Arrays.toString(tab3));
+    }
+
+
+    public static int[] merge(int[] tab1, int[] tab2 ) {
+        ArrayList<Integer> tab3 = new ArrayList<>();
+        int r1 = tab1.length;
+        int r2 = tab2.length;
+        int r3 = (r1+r2);
+        for(int i=0; i<r3; i++){
+            if(i<r1){
+                tab3.add(tab1[i]);
+            }
+            else if(i>r2){
+                tab3.add(tab2[i]);
+            }
+        }
+        return tab3;
+    }
+
+public static void main(String[] args) {
+    int[] tab1 = {1, 2, 3};
+    int[] tab2 = {4, 5, 6};
+    //append(tab1, tab2);
+    merge(tab1, tab2);
+    }
+}
