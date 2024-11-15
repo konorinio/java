@@ -1,0 +1,272 @@
+1. Podstawowe Pojęcia Programowania Obiektowego (OOP)
+Programowanie obiektowe opiera się na kilku kluczowych pojęciach:
+
+Klasa: Szablon/plan dla obiektów. To definicja tego, jakie dane (pola) i jakie operacje (metody) mogą być wykonywane na obiektach.
+Obiekt: Instancja klasy. Pojedynczy "egzemplarz" z danymi.
+Pola (Atrybuty): Zmienne w klasie opisujące stan obiektu.
+Metody: Funkcje w klasie, które operują na danych obiektu.
+Enkapsulacja: Ukrywanie szczegółów implementacji i udostępnianie jedynie niezbędnych interfejsów.
+Dziedziczenie: Mechanizm pozwalający jednej klasie dziedziczyć cechy i metody innej klasy.
+Polimorfizm: Zdolność do wywoływania metod z różnych klas za pomocą tego samego interfejsu.
+Abstrakcja: Ukrywanie szczegółów implementacji, aby pokazać tylko to, co jest niezbędne.
+2. Klasy i Obiekty
+Tworzenie Klasy
+java
+Skopiuj kod
+public class Student {
+    // Pola (atrybuty) klasy
+    String name;
+    int age;
+
+    // Metoda klasy
+    void introduceYourself() {
+        System.out.println("Hi, my name is " + name + " and I'm " + age + " years old.");
+    }
+}
+Tworzenie Obiektu Klasy
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        // Tworzenie obiektu klasy Student
+        Student student1 = new Student();
+        student1.name = "Jan";
+        student1.age = 21;
+
+        // Wywołanie metody obiektu
+        student1.introduceYourself();
+    }
+}
+Wyjście programu:
+
+vbnet
+Skopiuj kod
+Hi, my name is Jan and I'm 21 years old.
+3. Konstruktorzy
+Konstruktor to specjalna metoda, która jest wywoływana w momencie tworzenia obiektu.
+
+Tworzenie Konstruktora
+java
+Skopiuj kod
+public class Student {
+    String name;
+    int age;
+
+    // Konstruktor
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void introduceYourself() {
+        System.out.println("Hi, my name is " + name + " and I'm " + age + " years old.");
+    }
+}
+Tworzenie Obiektu za pomocą Konstruktora
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        // Tworzenie obiektu za pomocą konstruktora
+        Student student2 = new Student("Anna", 22);
+        student2.introduceYourself();
+    }
+}
+Wyjście programu:
+
+vbnet
+Skopiuj kod
+Hi, my name is Anna and I'm 22 years old.
+4. Enkapsulacja
+Ukrywanie danych klasy przed bezpośrednim dostępem, używając private i zapewniając dostęp za pomocą metod (getterów i setterów).
+
+Przykład Enkapsulacji
+java
+Skopiuj kod
+public class Student {
+    private String name;
+    private int age;
+
+    // Konstruktor
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter do uzyskania imienia
+    public String getName() {
+        return name;
+    }
+
+    // Setter do ustawienia imienia
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter do uzyskania wieku
+    public int getAge() {
+        return age;
+    }
+
+    // Setter do ustawienia wieku
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        }
+    }
+}
+Używanie Getterów i Setterów
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        Student student3 = new Student("Kasia", 20);
+        System.out.println("Name: " + student3.getName());
+        System.out.println("Age: " + student3.getAge());
+
+        // Zmiana wieku za pomocą settera
+        student3.setAge(25);
+        System.out.println("Updated Age: " + student3.getAge());
+    }
+}
+5. Dziedziczenie
+Dziedziczenie pozwala na tworzenie nowych klas na bazie istniejących.
+
+Przykład Dziedziczenia
+java
+Skopiuj kod
+// Klasa bazowa
+public class Person {
+    protected String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public void introduce() {
+        System.out.println("Hi, I'm " + name);
+    }
+}
+
+// Klasa pochodna
+public class Student extends Person {
+    private int studentId;
+
+    public Student(String name, int studentId) {
+        super(name); // Wywołanie konstruktora klasy bazowej
+        this.studentId = studentId;
+    }
+
+    public void showStudentId() {
+        System.out.println("My student ID is " + studentId);
+    }
+}
+Używanie Dziedziczenia
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        Student student4 = new Student("Piotr", 12345);
+        student4.introduce();
+        student4.showStudentId();
+    }
+}
+Wyjście programu:
+
+vbnet
+Skopiuj kod
+Hi, I'm Piotr
+My student ID is 12345
+6. Polimorfizm
+Możliwość wywoływania metod z różnych klas za pomocą tego samego interfejsu lub typu klasy bazowej.
+
+Przykład Polimorfizmu
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Ewa");
+        Student student = new Student("Robert", 67890);
+
+        // Przykład polimorfizmu
+        Person ref;
+
+        ref = person;
+        ref.introduce(); // Wywołuje metodę z klasy Person
+
+        ref = student;
+        ref.introduce(); // Wywołuje metodę z klasy Student
+    }
+}
+Wyjście programu:
+
+css
+Skopiuj kod
+Hi, I'm Ewa
+Hi, I'm Robert
+7. Abstrakcja
+Używamy klas abstrakcyjnych do definiowania szkieletu dla innych klas.
+
+Przykład Klasy Abstrakcyjnej
+java
+Skopiuj kod
+abstract class Animal {
+    abstract void makeSound(); // Metoda abstrakcyjna
+
+    public void breathe() {
+        System.out.println("Breathing...");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+Używanie Klasy Abstrakcyjnej
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.makeSound();
+        dog.breathe();
+    }
+}
+Wyjście programu:
+
+Skopiuj kod
+Woof!
+Breathing...
+8. Interfejsy
+Interfejs definiuje zestaw metod, które muszą być zaimplementowane w klasach.
+
+Przykład Interfejsu
+java
+Skopiuj kod
+interface Movable {
+    void move();
+}
+
+class Car implements Movable {
+    @Override
+    public void move() {
+        System.out.println("The car is moving");
+    }
+}
+Używanie Interfejsu
+java
+Skopiuj kod
+public class Main {
+    public static void main(String[] args) {
+        Movable myCar = new Car();
+        myCar.move();
+    }
+}
+Wyjście programu:
+
+csharp
+Skopiuj kod
+The car is moving
+To powinno dać Ci solidne podstawy do nauki programowania obiektowego w Javie! Jeśli masz jakieś pytania lub chcesz więcej przykładów na konkretny temat, daj znać!
