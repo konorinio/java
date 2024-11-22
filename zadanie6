@@ -1,0 +1,316 @@
+import java.security.ProtectionDomain;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public class Produkt{
+        private String nazwa;
+        private double cena;
+        private int iloscNaMagazynie;
+
+        public Produkt(String nazwa, double cena, int iloscNaMagazynie){
+            this.nazwa = nazwa;
+            this.cena = cena;
+            this.iloscNaMagazynie = iloscNaMagazynie;
+        }
+        public void wyswietlInformacje(){
+            System.out.println("Nazwa: " + nazwa);
+            System.out.println("Cena: " + cena);
+            System.out.println("Ilosc na Magazynie: " + iloscNaMagazynie);
+            System.out.println();
+        }
+        public void dodajDoMagazynu(int ilosc){
+            if(ilosc > 0){
+                iloscNaMagazynie += ilosc;
+                System.out.println("Dodano do magazynu: " + ilosc);
+                System.out.println();
+            }
+            else{
+                System.out.println("blad");
+            }
+        }
+        public void usunZMagazynu(int ilosc){
+            if(ilosc > 0 && iloscNaMagazynie >= ilosc){
+                iloscNaMagazynie -= ilosc;
+                System.out.println("Usuniete z magazynu: " + ilosc);
+            }
+            else{
+                System.out.println("blad");
+            }
+
+        }
+
+        public String getNazwa(){
+            return nazwa;
+        }
+        public double getCena(){
+            return cena;
+        }
+        public int getIloscNaMagazynie(){
+            return iloscNaMagazynie;
+        }
+
+        public class KoszykZakupowy{
+            private class PozycjaKoszyka{
+                Produkt produkt;
+                int ilosc;
+                PozycjaKoszyka(Produkt produkt, int ilosc){
+                    this.produkt = produkt;
+                    this.ilosc = ilosc;
+                }
+                void wyswietlInformacje(){
+                    produkt.wyswietlInformacje();
+                }
+
+                double wartoscPozycji(){
+                    return produkt.getCena() * ilosc;
+                }
+            }
+            private List<PozycjaKoszyka> produktyWkoszyku;
+            public KoszykZakupowy(){
+                produktyWkoszyku = new ArrayList<>();
+            }
+            public void dodajProdukt(Produkt produkt, int ilosc){
+                if(produkt.getIloscNaMagazynie() >= ilosc){
+                    produktyWkoszyku.add(new PozycjaKoszyka(produkt, ilosc));
+                    produkt.usunZMagazynu(ilosc);
+                    System.out.println("Dodano do magazynu: " + ilosc);
+                }
+                else{
+                    System.out.println("blad");
+                }
+            }
+            public void wyswietlZawartoscKoszyka(){
+                if(produktyWkoszyku.size() == 0){
+                    System.out.println("blad");
+                }
+                else{
+                    for(PozycjaKoszyka pozycja : produktyWkoszyku){
+                        pozycja.wyswietlInformacje();
+                    }
+                }
+            }
+            public double obliczCalkowitaWartosc(){
+                double suma = 0.0;
+                for(PozycjaKoszyka pozycja : produktyWkoszyku){
+                    suma += pozycja.wartoscPozycji();
+                }
+                return suma;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        Produkt produkt = main.new Produkt("kolpaki do fiata", 29.99, 10);
+        Produkt kebab = new Produkt("kebab", 23.00, 10);
+        Produkt piwo  = new Produkt("tyskie", 2.99, 10);
+        kebab.wyswietlInformacje();
+        piwo.wyswietlInformacje();
+        produkt.wyswietlInformacje();
+
+        Produkt.KoszykZakupowy koszyk = new KoszykZakupowy();
+
+
+        produkt.dodajDoMagazynu(6);
+        produkt.wyswietlInformacje();
+
+        produkt.usunZMagazynu(11);
+        produkt.wyswietlInformacje();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.ArrayList;
+
+class Produkt {
+    String nazwa;
+    double cena;
+    int iloscNaMagazynie;
+
+    void wyswietlInformacje() {
+        System.out.println("Nazwa produktu: " + nazwa + "\n Cena produktu: " + cena + "\n Ilosc produktu: " + iloscNaMagazynie);
+    }
+    void dodajDoMagazynu(int ilosc) {
+        iloscNaMagazynie += ilosc;
+    }
+    void usunZMagazynu(int ilosc) {
+        if(iloscNaMagazynie > ilosc) {
+            iloscNaMagazynie -= ilosc;
+        }
+        else{
+            System.out.println("Niewystarczajaca ilosc produktu aby odjac");
+        }
+    }
+}
+
+class koszykZakupowy {
+    ArrayList<Produkt> rzecz = new ArrayList<>();
+    void dodajProdukt(Produkt thing, int ilosc) {
+        if(thing.iloscNaMagazynie < ilosc) {
+            System.out.println("Niewystarczajaca ilosc produktu na magazynie");
+        }
+        else{
+            Produkt temp = new Produkt();
+            thing.iloscNaMagazynie -= ilosc;
+            temp = thing;
+            rzecz.add(temp);
+        }
+    }
+    void wyswietlZawartoscKoszyka() {
+        for(Produkt thing : rzecz) {
+            if(thing.nazwa != null) {
+                System.out.println("Nazwa: " + thing.nazwa);
+                System.out.println("Cena: " + thing.cena);
+                System.out.println("Ilosc pozostala: " + thing.iloscNaMagazynie);
+            }
+        }
+    }
+    double obliczCalkowitaWartosc() {
+        double suma = 0;
+        for(Produkt thing : rzecz) {
+            if(thing.nazwa != null) {
+                suma += thing.cena;
+            }
+        }
+        return suma;
+    }
+}
+class Platnosc {
+    double kwota;
+    String statusPlatnosci;
+    public Platnosc(double kwota, String statusPlatnosci) {
+        this.kwota = kwota;
+        this.statusPlatnosci = statusPlatnosci;
+    }
+    void zaplac() {
+        statusPlatnosci = "Oplacone";
+        kwota = 0;
+    }
+}
+
+class Zamowienie {
+    koszykZakupowy koszyk = new koszykZakupowy();
+    String statusZamowienia;
+    Platnosc platnosc;
+    public Zamowienie(koszykZakupowy koszyk, String status) {
+        this.koszyk = koszyk;
+        this.statusZamowienia = status;
+        platnosc = new Platnosc(koszyk.obliczCalkowitaWartosc(), "nieoplacone");
+    }
+    void ustawStatusZamowienia(String status) {
+        statusZamowienia = status;
+    }
+    void wyswietlZamowienie() {
+        System.out.println("Zamowienie:");
+        koszyk.wyswietlZawartoscKoszyka();
+        System.out.println("Status realizacji zamowienia: " + statusZamowienia);
+    }
+    void finalizujZamowienie() {
+        if(platnosc.statusPlatnosci.equals("Oplacone")) {
+            statusZamowienia = "Gotowe do wysylki";
+        }
+    }
+    void zwrocProdukt(Produkt produkt, int ilosc) {
+        produkt.iloscNaMagazynie += ilosc;
+        koszyk.rzecz.remove(produkt);
+    }
+}
+
+class Klient {
+    String imie;
+    String nazwisko;
+    ArrayList<Zamowienie> listaZamowien = new ArrayList<>();
+    public Klient(String imie, String nazwisko) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+    }
+    void dodajZamowienie(Zamowienie order) {
+        listaZamowien.add(order);
+    }
+    void wyswietlHistorieZamowien() {
+        System.out.println("Historia zamowien dla " + imie + " " + nazwisko);
+        for(Zamowienie order : listaZamowien) {
+            order.wyswietlZamowienie();
+        }
+    }
+    double obliczLacznyKosztZamowien() {
+        double suma = 0;
+        for(Zamowienie order : listaZamowien) {
+            suma += order.koszyk.obliczCalkowitaWartosc();
+        }
+        return suma;
+    }
+}
+
+class Sklep {
+    ArrayList<Produkt> produkty = new ArrayList<>();
+    void dodajProdukt(Produkt produkt) {
+        produkty.add(produkt);
+    }
+    void wyswietlOferty() {
+        for(Produkt produkt : produkty) {
+            if(produkt.nazwa != null) {
+                System.out.println("Nazwa produktu: " + produkt.nazwa);
+                System.out.println("Cena: " + produkt.cena);
+                System.out.println("Ilosc w magazynie: " + produkt.iloscNaMagazynie);
+            }
+        }
+    }
+    Produkt wyszukajProdukt(String nazwa) {
+        for(Produkt produkt : produkty) {
+            if(produkt.nazwa.equals(nazwa)) {
+                return produkt;
+            }
+        }
+        return null;
+    }
+    void zakupy(Produkt produkt, int ilosc) {
+        koszykZakupowy koszyk = new koszykZakupowy();
+        koszyk.dodajProdukt(produkt, ilosc);
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Produkt grzyb = new Produkt();
+        grzyb.nazwa = "prawdziwy";
+        grzyb.cena = 5.99;
+        grzyb.iloscNaMagazynie = 1000;
+//        grzyb.wyswietlInformacje();
+//        grzyb.dodajDoMagazynu(999);
+//        grzyb.wyswietlInformacje();
+//        grzyb.usunZMagazynu(999);
+//        grzyb.wyswietlInformacje();
+//        grzyb.usunZMagazynu(99999999);
+        koszykZakupowy koszyk = new koszykZakupowy();
+        koszyk.dodajProdukt(grzyb, 5);
+//        koszyk.wyswietlZawartoscKoszyka();
+        Produkt grzyb2 = new Produkt();
+        grzyb2.nazwa = "falszywy";
+        grzyb2.cena = 100.00;
+        grzyb2.iloscNaMagazynie = 10;
+        koszyk.dodajProdukt(grzyb2, 10);
+//        koszyk.wyswietlZawartoscKoszyka();
+//        System.out.println(koszyk.obliczCalkowitaWartosc());
+        Zamowienie zamowienie1 = new Zamowienie(koszyk, "w trakcie realizacji");
+//        zamowienie1.wyswietlZamowienie();
+        Klient kamil = new Klient("Kamil", "Steinbach");
+        kamil.dodajZamowienie(zamowienie1);
+        kamil.wyswietlHistorieZamowien();
+        System.out.print(kamil.obliczLacznyKosztZamowien());
+    }
+}
