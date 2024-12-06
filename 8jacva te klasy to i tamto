@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+
+public class Main {
+// tu dziedziczenie i takie tam dzikie triki tutaj cos tam ogarniam
+    class Osoba{
+        private String imie;
+        private String nazwisko;
+    }
+
+    class Klient{
+        private String imie;
+        private String nazwisko;
+
+        public Klient(String imie, String nazwisko) {
+            this.imie = imie;
+            this.nazwisko = nazwisko;
+    }
+        public Klient() {
+
+        }
+}
+
+    public class KlientFirmowy extends Klient {
+        private final String NIP;
+        private final String REGON;
+
+        public KlientFirmowy(String NIP, String REGON) {
+            this.NIP = NIP;
+            this.REGON = REGON;
+        }
+    }
+
+    public class KlientIndywidualny extends Klient {
+        private final String PESEL;
+        public KlientIndywidualny(String PESEL) {
+            this.PESEL = PESEL;
+        }
+    }
+
+
+
+//tutaj abstrakcyjna klasa jeszcze nie wiem co i jak ale sie ogarnie
+    abstract class Owoc {
+        public abstract String smak();
+        public abstract String  umyj();
+        public abstract String zjedz();
+    }
+    abstract class Warzywo{
+           public abstract String smak();
+           public abstract String umyj();
+           public abstract String zjedz();
+    }
+
+
+//tutaj mialem wylew ale troche zaszlo edukacji podczas tego niebezpiecznego procesu
+
+//    class Banan extends Owoc{
+//        public String smak(){
+//            return "Bananowy";
+//        }
+//        public String umyj(){
+//            return "Banan umyty";
+//        }
+//        public String zjedz(){
+//            return "zjadlem banana";
+//        }
+//    }
+//    class Ziemniak extends Warzywo{
+//        public String smak(){
+//            return "slaby";
+//        }
+//        public String umyj(){
+//            return "ziemniak umyty";
+//        }
+//        public String zjedz(){
+//            return "zjadlem ziemniaka";
+//        }
+//    }
+
+// tu tez wylew
+
+//    public static void main(String[] args) {
+//
+//    }
+}
