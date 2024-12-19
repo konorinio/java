@@ -1,0 +1,39 @@
+public class House extends Building {
+    int numberOfRooms;
+
+    public House(double heigh, String color, int numberOfRooms) {
+        this.height = heigh;
+        this.color = color;
+        this.numberOfRooms = numberOfRooms;
+    }
+
+    public House(String color, int numberOfRooms) {
+        this.color = color;
+        this.numberOfRooms = numberOfRooms;
+    }
+    public House(double height, int numberOfRooms) {
+        this.height = height;
+        this.numberOfRooms = numberOfRooms;
+    }
+    public House(double height, String color) {
+        this.height = height;
+        this.color = color;
+    }
+
+    public House(double height) {
+        this.height = height;
+    }
+
+    public House(String color) {
+        this.color = color;
+    }
+
+    public House(int numberOfRooms){
+        this.numberOfRooms = numberOfRooms;
+    }
+    @Override
+    public String toString() {
+        return  " " + height + " " + color + " " + numberOfRooms;
+    }
+
+}
