@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Main {
+    //klasa
+//    public static class Dog{
+//        private String name;
+//        private String breed;
+//        private int age;
+
+        //konstruktor
+//        public Dog(String name, String breed, int age) {
+//            this.name = name;
+//            this.breed = breed;
+//            this.age = age;
+//        }
+
+        //metoda
+//        public void bark(){
+//            System.out.println("Wow Wow");
+//        }
+
+        //gettery
+//        public String getName() {
+//            return name;
+//        }
+//        public String getBreed() {
+//            return breed;
+//        }
+//        public int getAge() {
+//            return age;
+//        }
+
+//    }
+
+//    public int kutas(int i, int j){
+//        return i;
+//    }
+//    public double kutas(double i, double j){
+//        return i;
+//    }
+    public static void main(String[] args) {
+//        Dog burek = new Dog("Azor", "Kundel", 7);
+//        System.out.println(" " + burek.getName() + " " + burek.getBreed() + " " + burek.getAge());
+//        burek.bark();
+//        BookDTO book1 = new BookDTO("kutas", "fiut", 420.69, 1986);
+//        System.out.println(book1);
+//
+//
+//
+//        PointC piton = new PointC(3.5, 12.3);
+//        PointR piton2 = piton.toPointR();
+//        System.out.println(piton2);
+//
+//        PointR piton3 = new PointR(420.69, 21.37);
+//        PointC piton4 = piton3.toPointC();
+//        System.out.println(piton4.toString());
+//
+//        BankAccount fiut = new BankAccount("fiutpenis12");
+//        System.out.println(fiut);
+//
+//        Building princok = new Building(15.55, "fiutowy");
+//        System.out.println(princok.getHeight() + " " + princok.getColor());
+
+        House princok = new House(12);
+        System.out.println(princok);
+    }
+}
