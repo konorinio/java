@@ -1,0 +1,19 @@
+public class Building {
+    double height;
+    String color;
+
+    public Building(double height, String color) {
+        this.height = height;
+        this.color = color;
+    }
+    public Building(){
+        this.height = 0.00;
+        this.color = "brak";
+    }
+    public double getHeight() {
+        return height;
+    }
+    public String getColor() {
+        return color;
+    }
+}
