@@ -1,0 +1,10 @@
+public record BankAccount(String numer, double saldo) {
+//    public BankAccount {
+//        if(saldo == null){
+//            saldo = "0.0";
+//        }
+//    }
+    public BankAccount(String numer) {
+        this(numer, 0.0);
+    }
+}
