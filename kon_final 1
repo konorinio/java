@@ -1,0 +1,9 @@
+public class Configuration {
+    public static final double applicationVersion = 1.05;
+    public static String applicationName;
+
+    public Configuration(double applicationVersion, String applicationName) {
+        //this.applicationVersion = applicationVersion;
+        this.applicationName = applicationName;
+    }
+}
