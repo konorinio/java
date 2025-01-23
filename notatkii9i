@@ -1,0 +1,260 @@
+// Notatki dotyczące rekordów, klas, programowania generycznego i interfejsów generycznych
+
+// REKORDY
+/*
+Rekordy to uproszczona forma klas, wprowadzona w Javie 14 (eksperymentalnie) i w pełni stabilna od Javy 16.
+Służą do przechowywania danych i eliminują konieczność ręcznego pisania metod takich jak toString(), equals(), hashCode() i getterów.
+Rekordy są niemutowalne (pola są finalne).
+*/
+
+public record MusicTrack(String title, String artist, double duration) {
+    // Kompaktowy konstruktor do walidacji danych
+    public MusicTrack {
+        if (duration <= 0) {
+            throw new IllegalArgumentException("Duration must be greater than 0");
+        }
+    }
+
+    // Metoda niestandardowa
+    public boolean isLongTrack() {
+        return duration > 5;
+    }
+
+    // Metoda do wyświetlania szczegółów
+    public void printDetails() {
+        System.out.println("Title: " + title + ", Artist: " + artist + ", Duration: " + duration);
+    }
+}
+
+// KLASY
+/*
+Klasy są podstawowym elementem programowania obiektowego w Javie. Służą do definiowania obiektów poprzez pola i metody.
+*/
+
+// Przykład klasy: BusDepot
+package transport;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class BusDepot {
+    private String name;
+    private String city;
+    private ArrayList<String> buses;
+
+    public BusDepot(String name, String city) {
+        this.name = name;
+        this.city = city;
+        this.buses = new ArrayList<>();
+    }
+
+    // Dodawanie autobusu
+    public void addBus(String busNumber) {
+        buses.add(busNumber);
+    }
+
+    // Usuwanie autobusu
+    public void removeBus(String busNumber) {
+        buses.remove(busNumber);
+    }
+
+    // Gettery i Settery
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public ArrayList<String> getBuses() {
+        return new ArrayList<>(buses); // Kopia listy dla bezpieczeństwa
+    }
+
+    // Nadpisanie toString
+    @Override
+    public String toString() {
+        return "BusDepot{name='" + name + "', city='" + city + "', buses=" + buses + '}';
+    }
+
+    // Nadpisanie equals i hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusDepot)) return false;
+        BusDepot busDepot = (BusDepot) o;
+        return Objects.equals(name, busDepot.name) &&
+               Objects.equals(city, busDepot.city) &&
+               Objects.equals(buses, busDepot.buses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, city, buses);
+    }
+}
+
+// Klasa dziedzicząca: CityBusDepot
+package transport;
+
+import java.util.Objects;
+
+public class CityBusDepot extends BusDepot {
+    private int numberOfRoutes;
+
+    public CityBusDepot(String name, String city, int numberOfRoutes) {
+        super(name, city);
+        this.numberOfRoutes = numberOfRoutes;
+    }
+
+    public int getNumberOfRoutes() {
+        return numberOfRoutes;
+    }
+
+    public void setNumberOfRoutes(int numberOfRoutes) {
+        this.numberOfRoutes = numberOfRoutes;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", numberOfRoutes=" + numberOfRoutes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CityBusDepot)) return false;
+        if (!super.equals(o)) return false;
+        CityBusDepot that = (CityBusDepot) o;
+        return numberOfRoutes == that.numberOfRoutes;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numberOfRoutes);
+    }
+}
+
+// Klasa testowa
+package transport;
+
+public class TestBusDepot {
+    public static void main(String[] args) {
+        BusDepot depot = new BusDepot("Central Depot", "New York");
+        depot.addBus("ABC123");
+        depot.addBus("XYZ789");
+        System.out.println(depot);
+
+        CityBusDepot cityDepot = new CityBusDepot("City Depot", "Los Angeles", 5);
+        cityDepot.addBus("LMN456");
+        System.out.println(cityDepot);
+    }
+}
+
+// PROGRAMOWANIE GENERYCZNE
+/*
+Programowanie generyczne pozwala pisać uniwersalny kod, który działa z różnymi typami danych, zapewniając bezpieczeństwo typów.
+*/
+
+// Generyczna metoda do sprawdzania, czy dowolny argument jest null
+package checking;
+
+public class CheckingUtils {
+    public static <T> boolean isEitherNull(T a, T b) {
+        return a == null || b == null;
+    }
+}
+
+// Klasa testowa
+package checking;
+
+public class TestCheckingUtils {
+    public static void main(String[] args) {
+        String str1 = "Hello";
+        String str2 = null;
+
+        System.out.println(CheckingUtils.isEitherNull(str1, str2)); // true
+    }
+}
+
+// Generyczna metoda do czyszczenia kolekcji
+package algorithm;
+
+import java.util.Collection;
+
+public class AlgorithmUtils {
+    public static <T> void clearIfContains(Collection<T> collection, T element) {
+        if (collection == null) {
+            throw new IllegalArgumentException("Collection cannot be null");
+        }
+        if (collection.contains(element)) {
+            collection.clear();
+        }
+    }
+}
+
+// Klasa testowa
+package algorithm;
+
+import java.util.ArrayList;
+
+public class TestAlgorithmUtils {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+
+        AlgorithmUtils.clearIfContains(list, "Apple");
+        System.out.println(list.isEmpty()); // true
+    }
+}
+
+// Generyczna klasa i interfejsy generyczne
+/*
+Generyczne interfejsy Comparable<T> i Comparator<T> służą do definiowania reguł porównywania obiektów.
+*/
+
+// Klasa implementująca Comparable
+package shopping;
+
+public class Product implements Comparable<Product> {
+    private String name;
+    private String category;
+    private double price;
+
+    public Product(String name, String category, double price) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
+    @Override
+    public int compareTo(Product other) {
+        return Double.compare(this.price, other.price);
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + category + "): $" + price;
+    }
+}
+
+// Klasa testowa
+package shopping;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class TestProduct {
+    public static void main(String[] args) {
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product("Laptop", "Electronics", 1200.99));
+        products.add(new Product("Phone", "Electronics", 799.49));
+        products.add(new Product("Tablet", "Electronics", 450.00));
+
+        Collections.sort(products);
+        for (Product product : products) {
+            System.out.println(product);
+        }
+    }
+}
