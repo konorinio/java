@@ -1,0 +1,181 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Klasa Box - ogólna klasa (generics), przechowuje jeden obiekt dowolnego typu T
+class Box<T>
+{
+    T obiekt; // Pole, w którym przechowujemy obiekt
+
+    // Ustawia obiekt
+    public void setObiekt(T obiekt)
+    {
+        this.obiekt = obiekt;
+    }
+    // Zwraca przechowywany obiekt
+    public T getObiekt()
+    {
+        return obiekt;
+    }
+}
+
+// Klasa Counter - ogólna klasa, która przechowuje listę obiektów typu T
+class Counter<T>
+{
+    List<T> lista = new ArrayList<T>(); // Lista przechowująca obiekty
+
+    // Dodaje obiekt do listy
+    public void add(T obiekt)
+    {
+        lista.add(obiekt);
+    }
+
+    // Zwraca liczbę elementów w liście
+    public int getCount()
+    {
+        return lista.size();
+    }
+}
+
+// Klasa Pair - przechowuje dwa obiekty tego samego typu T
+class Pair<T>
+{
+    T obiekt1; // Pierwszy obiekt
+    T obiekt2; // Drugi obiekt
+
+    // Ustawia pierwszy obiekt
+    public void setObiekt1(T obiekt1)
+    {
+        this.obiekt1 = obiekt1;
+    }
+    // Zwraca pierwszy obiekt
+    public T getObiekt1()
+    {
+        return obiekt1;
+    }
+    // Ustawia drugi obiekt
+    public void setObiekt2(T obiekt2)
+    {
+        this.obiekt2 = obiekt2;
+    }
+    // Zwraca drugi obiekt
+    public T getObiekt2()
+    {
+        return obiekt2;
+    }
+}
+
+// Główna klasa programu
+class Main {
+
+    // Klasa Animal - reprezentuje zwierzę z nazwą i wiekiem
+    public static class Animal
+    {
+        private String nazwa; // Nazwa zwierzęcia
+        private int age; // Wiek zwierzęcia
+
+        // Konstruktor - ustawia nazwę i wiek
+        public Animal(String nazwa, int age)
+        {
+            this.nazwa = nazwa;
+            this.age = age;
+        }
+
+        // Setter dla nazwy
+        public void setNazwa(String nazwa)
+        {
+            this.nazwa = nazwa;
+        }
+        // Getter dla nazwy
+        public String getNazwa()
+        {
+            return nazwa;
+        }
+        // Setter dla wieku
+        public void setAge(int age)
+        {
+            this.age = age;
+        }
+        // Getter dla wieku
+        public int getAge()
+        {
+            return age;
+        }
+    }
+
+    // Klasa Dog - dziedziczy po klasie Animal
+    public static class Dog extends Animal
+    {
+        // Konstruktor psa - przekazuje nazwę i wiek do klasy nadrzędnej
+        public Dog(String nazwa, int age)
+        {
+            super(nazwa, age);
+        }
+    }
+
+    // Funkcja generics, która znajduje starszy obiekt typu Animal
+    public static <T extends Animal> T findMax(T el1, T el2)
+    {
+        return el1.getAge() > el2.getAge() ? el1 : el2; // Porównuje wiek i zwraca starszy obiekt
+    }
+
+    // Funkcja, która znajduje najmłodszego i najstarszego psa w tablicy
+    public static void findMinMaxAge(Dog tab[], Pair<? super Dog> result)
+    {
+        Dog min = tab[0]; // Zakładamy, że pierwszy pies jest najmłodszy
+        Dog max = tab[0]; // Zakładamy, że pierwszy pies jest najstarszy
+
+        // Iterujemy po wszystkich psach
+        for (Dog dog : tab)
+        {
+            if (dog.getAge() > max.getAge()) // Jeśli pies jest starszy od obecnego max
+            {
+                max = dog;
+            }
+            if (dog.getAge() < min.getAge()) // Jeśli pies jest młodszy od obecnego min
+            {
+                min = dog;
+            }
+        }
+        // Ustawiamy wyniki w obiekcie Pair
+        result.setObiekt1(min); // Najmłodszy pies
+        result.setObiekt2(max); // Najstarszy pies
+    }
+
+    // Funkcja generics, która sprawdza, czy dwa obiekty są równe
+    public static <T> boolean isEqual(T a, T b)
+    {
+        return a.equals(b); // Używa metody equals do porównania
+    }
+
+    public static void main(String[] args)
+    {
+        // Tworzymy psy z ich nazwami i wiekiem
+        Dog dog1 = new Dog("Max", 3);
+        Dog dog2 = new Dog("Burek", 4);
+        Dog dog3 = new Dog("Zosia", 6);
+
+        // Znajdujemy starszego psa między dog1 i dog2
+        Dog max = findMax(dog1, dog2);
+        System.out.println(max.getNazwa() + " " + max.getAge()); // Wyświetlamy nazwę i wiek starszego psa
+
+        // Tworzymy tablicę psów
+        Dog[] tab = new Dog[3];
+        tab[0] = dog1;
+        tab[1] = dog2;
+        tab[2] = dog3;
+
+        // Tworzymy obiekt Pair do przechowywania wyników
+        Pair<Animal> result = new Pair<>();
+
+        // Znajdujemy najmłodszego i najstarszego psa w tablicy
+        findMinMaxAge(tab, result);
+
+        // Pobieramy wyniki z obiektu Pair
+        Dog najmlodszy = (Dog) result.getObiekt1();
+        Dog najstarszy = (Dog) result.getObiekt2();
+
+        // Wyświetlamy wiek i nazwę najmłodszego oraz najstarszego psa
+        System.out.println(najmlodszy.getAge() + " " + najmlodszy.getNazwa());
+        System.out.println(najstarszy.getAge() + " " + najstarszy.getNazwa());
+    }
+}
